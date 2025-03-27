@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bashkiria</title>
+    <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #map {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .district-info-panel {
+            position: fixed;
+            bottom: -400px;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+            transition: bottom 0.5s;
+            z-index: 2;
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 32.5px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+        .toggle-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        .toggle-button {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 8px 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <!-- Выдвигающаяся панель с информацией о районе -->
+    <div id="districtInfoPanel" class="district-info-panel">
+        <!-- Кнопка для закрытия панели -->
+        <span class="close-btn" onclick="closeDistrictInfoPanel()">✖</span>
+        <!-- Здесь будет отображаться информация о районе -->
+        <div id="panelContent"></div>
+    </div>
+
+    <!-- Кнопки для переключения между годами -->
+    <div class="toggle-buttons">
+        <button class="toggle-button" onclick="loadGeoJSON('1970')">1970</button>
+        <button class="toggle-button" onclick="loadGeoJSON('1979')">1979</button>
+        <button class="toggle-button" onclick="loadGeoJSON('1989')">1989</button>
+        <button class="toggle-button" onclick="loadGeoJSON('2010')">2010</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
